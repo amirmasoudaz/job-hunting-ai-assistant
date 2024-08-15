@@ -43,50 +43,6 @@ class Tree:
                                             "children": []
                                         },
                                         {
-                                            "parent": "templates",
-                                            "desc": "dir_templates",
-                                            "children": [
-                                                {
-                                                    "parent": "resume",
-                                                    "desc": "dir_template_resume",
-                                                    "children": [
-                                                        {
-                                                            "parent": "template.html",
-                                                            "desc": "file_template_resume",
-                                                            "dtype": "html"
-                                                        },
-                                                        {
-                                                            "parent": "styles.css",
-                                                            "desc": "file_template_resume_styles",
-                                                            "dtype": "css"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "parent": "letter",
-                                                    "desc": "dir_template_letter",
-                                                    "children": [
-                                                        {
-                                                            "parent": "template.docx",
-                                                            "desc": "file_template_letter",
-                                                            "dtype": "docx"
-                                                        }
-                                                    ]
-                                                },
-                                                {
-                                                    "parent": "email",
-                                                    "desc": "dir_template_email",
-                                                    "children": [
-                                                        {
-                                                            "parent": "template.txt",
-                                                            "desc": "file_template_email",
-                                                            "dtype": "txt"
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
-                                        {
                                             "parent": "applications",
                                             "desc": "dir_applications",
                                             "children": [

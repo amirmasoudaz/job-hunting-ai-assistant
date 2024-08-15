@@ -9,7 +9,7 @@ from builders.resume import blocks
 
 
 class ResumeBuilder:
-    _headless: bool = True
+    _headless: bool = False
     _theme: str = "light"
 
     def __init__(self):
@@ -137,7 +137,7 @@ class ResumeBuilder:
         contact = ' | '.join(data[field] for field in ['email', 'phone'] if data.get(field))
         if data.get("social_media", None):
             socials = ' | '.join(
-                self.a(text=social["platform"], href=social["handle/url"])
+                self.a(text=social["platform"], href=social["url"])
                 for social in data["social_media"])
             contact = f"{contact} | {socials}" if contact else socials
         content = f"{location} | {contact}" if contact else location
@@ -239,12 +239,12 @@ class ResumeBuilder:
 
 
 if __name__ == "__main__":
-    from builders.resume.samples import ultimate_modified as sample
+    from builders.resume.samples import sample as sample
 
     root = os.path.dirname(os.path.dirname(__file__))
     path = os.path.join(root, "resume", "outputs")
     ResumeBuilder().build(
         data=sample, path=path,
-        file_name="With Summary",
+        file_name="Sample",
         include_summary=True,
         del_tmp_files=False)

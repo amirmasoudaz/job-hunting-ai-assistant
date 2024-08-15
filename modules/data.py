@@ -56,8 +56,8 @@ class Data:
                 data=self.resume_json,
                 path=self.paths["dirs"]["resume"],
                 file_name="resume",
-                del_tmp_files=True,
-                include_summary=True,
+                del_tmp_files=False,
+                include_summary=False,
                 hyperlink_decorations=False)
         await self.load_categories()
 
@@ -107,16 +107,18 @@ class Data:
                 session=session)
             completion = response["output"]
             if isinstance(completion, dict) and len(completion) == 1:
-                return completion.get(section, completion)
+                return section, completion.get(section, completion)
             else:
                 await asyncio.sleep(backoff)
                 return await get_section_json(section, content, backoff=backoff * 2)
 
-        self.resume_json = {}
-        for key, value in self.resume_md.items():
-            if value == "":
-                continue
-            self.resume_json[key] = await get_section_json(section=key, content=value)
+        md_to_json_tasks = [
+            get_section_json(section=key, content=value)
+            for key, value in self.resume_md.items()
+            if value != ""
+        ]
+        sections_json = await asyncio.gather(*md_to_json_tasks)
+        self.resume_json = {key: value for key, value in sections_json}
 
     async def load_categories(self):
         async def get_embedding(category: str, definition: str, keywords: str) -> dict:

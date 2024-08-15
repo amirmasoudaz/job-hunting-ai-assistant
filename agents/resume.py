@@ -1,59 +1,5 @@
 import json
 
-template = {
-    "name": "<NAME>",
-    "city": "<CITY>",
-    "state/province": "<STATE/PROVINCE>",
-    "country": "<COUNTRY>",
-    "email": "<EMAIL_ADDRESS>",
-    "phone": "<PHONE_NUMBER>",
-    "website": "<WEBSITE>",
-    "social_media": [
-        {
-            "platform": "<PLATFORM>",
-            "handle/url": "<USERNAME>"
-        }
-    ],
-    "summary": "<PROFESSIONAL_SUMMARY>",
-    "skills": {
-        "<TITLE>": [],
-    },
-    "work_experience": [
-        {
-            "company": "<COMPANY_NAME>",
-            "position": "<POSITION/ROLE>",
-            "type": "<FULL_TIME/PART_TIME/CONTRACT/FREELANCE>",
-            "duration": {
-                "from": "<START_DATE>",
-                "till": "<END_DATE/PRESENT>"
-            },
-            "details": [
-                "<TITLE>: <DESCRIPTION>"
-            ]
-        }
-    ],
-    "projects": [
-        {
-            "title": "<PROJECT_NAME>",
-            "duration": {
-                "from": "<START_DATE>",
-                "till": "<END_DATE/PRESENT>"
-            },
-            "description": "<DESCRIPTION>"
-        }
-    ],
-    "education": [
-        {
-            "degree": "<DEGREE>",
-            "institution": "<INSTITUTION_NAME>",
-            "duration": {
-                "from": "<START_DATE>",
-                "till": "<END_DATE/PRESENT>"
-            }
-        }
-    ]
-}
-
 
 resume_conv_raw_to_md = """
 The following is the curriculum vitae of a user. The curriculum vitae will be delimited with triple &&& characters.
@@ -86,56 +32,6 @@ Ensure that your response is lossless and the data is accurately transferred fro
 
 NOTE: {template_info}"""
 
-empty_template = {
-    "name": "",
-    "city": "",
-    "state/province": "",
-    "country": "",
-    "email": "",
-    "phone": "",
-    "social_media": [
-        {
-            "platform": "",
-            "handle/url": ""
-        },
-    ],
-    "website": [],
-    "professional_summary": "",
-    "work_experience": [
-        {
-            "company": "",
-            "position": "",
-            "type": "",
-            "duration": {
-                "from": "",
-                "till": ""
-            },
-            "details": [],
-        },
-    ],
-    "project_experience": [
-        {
-            "name": "",
-            "duration": {
-                "from": "",
-                "till": ""
-            },
-            "description": ""
-        },
-    ],
-    "education": [
-        {
-            "degree": "",
-            "institution": "",
-            "duration": {
-                "from": "",
-                "till": ""
-            }
-        },
-    ],
-    "skills": [],
-}
-
 resume_section_info = {
     "info": "",
     "work": "As the value for the 'details' key, you should generate a dictionary, that each key of the dictionary should be a title of a task, project, or responsibility and the value of that key should be the descriptions of that task, project, or responsibility. \nAs the 'type' of work experience, choose the most appropriate type of employment (e.g. 'full-time', 'part-time', 'contract', 'remote', 'internship', 'volunteer', 'co-op', etc.) and if multiple types are provided, join them together using a comma.\n\nAs the value of the 'url' key, you should generate a dictionary where the 'title' key be the title of the hyperlink (e.g. 'Website', 'GitHub', etc.) and the 'link' key should be the URL of the hyperlink.",
@@ -158,7 +54,7 @@ resume_section_templates = {
             "social_media": [
                 {
                     "platform": "",
-                    "handle/url": ""
+                    "url": ""
                 },
             ],
             "website": [],
@@ -246,15 +142,3 @@ resume_section_templates = {
 resume_section_templates = {
     key: json.dumps(value, indent=4) for key, value in resume_section_templates.items()
 }
-
-context = f"""
-Your task is to customize the user's ultimate Curriculum Vitae (CV) by analyzing the job description and the user's compatibility weaknesses and strengths compared to the job description.
-You will be provided with the job description in JSON format delimited by triple (~~~) symbols.
-You will also be provided with the user's CV in JSON format delimited by triple hash symbols (###).
-Weaknesses are denoted by the triple minus symbols (---) and strengths are denoted by the triple plus symbols (+++).
-
-Analyze the user's CV to understand the user's qualifications, skills, and experiences.
-Compare the user's qualifications with the required and preferred qualities of the job description.
-Identify the user's weaknesses and strengths compared to the job description.
-Make more focus on the user's strengths and if possible, mitigate the user's weaknesses.
-"""

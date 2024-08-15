@@ -1,8 +1,8 @@
 # AmirMasoud Azadfar
 **Data Scientist and AI Engineer**  
 Thunder Bay, ON, Canada  
-Email: amazadfar@gmail.com  
-Phone: +1 (123) 456-7890  
+Email: amirmazadfar@gmail.com  
+Phone: +1 (343) 988-3995  
 
 [LinkedIn](https://www.linkedin.com/in/amazadfar) | [GitHub](https://github.com/amirmasoudaz)
 

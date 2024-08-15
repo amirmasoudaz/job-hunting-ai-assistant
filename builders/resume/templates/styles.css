@@ -61,11 +61,11 @@ html, body {
 }
 
 .skills-section .col-2 {
-    padding-right: 5px;
+    padding-right: 0;
 }
 
 .skills-section .col-10 {
-    padding-left: 5px;
+    padding-left: 10px;
 }
 
 .title-line-wrapper {

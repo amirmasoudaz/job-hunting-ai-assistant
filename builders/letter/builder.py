@@ -21,15 +21,16 @@ class LetterBuilder:
             COMPANY=data['recipient']['company'],
             CONTACT="\n".join(
                 contact for contact in [
-                    data['recipient']['email_address'],
-                    data['recipient']['phone_number'],
-                    data['recipient']['address']
+                    data['recipient'].get('email_address'),
+                    data['recipient'].get('phone_number'),
+                    data['recipient'].get('address')
                 ] if contact),
             JOB_REFERENCE=data['letter']['job_reference'],
             OPENING=data['letter']['opening'],
             PARAGRAPH_ONE=data['letter']['paragraph_one'],
             PARAGRAPH_TWO=data['letter']['paragraph_two'],
             PARAGRAPH_THREE=data['letter']['paragraph_three'],
+            PARAGRAPH_FOUR=data['letter'].get('paragraph_four', ''),
             APPRECIATION=data['letter']['appreciation'],
             CLOSING=data['letter']['closing'],
             SIGNATURE=data['letter']['signature'])
@@ -41,9 +42,9 @@ class LetterBuilder:
 
 
 if __name__ == "__main__":
-    from builders.letter.samples import overbond as sample
+    from builders.letter.samples import sample as sample
 
     root = os.path.dirname(os.path.dirname(__file__))
     path = os.path.join(root, "letter", "outputs")
     builder = LetterBuilder(template="simple")
-    builder.build(data=sample, path=path, file_name="Sample - Letter")
+    builder.build(data=sample, path=path, file_name="Sample")
